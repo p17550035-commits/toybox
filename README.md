@@ -4,94 +4,144 @@ Fully modular toolbox
 # ToyBox Installer (Linux First)
 
 ## Overview
-This installer is designed to let any Linux system fully rebuild ToyBox from scratch using a single command copied directly from the README.md. It creates the folder tree, installs dependencies, pulls the GitHub repo, installs active modules, and sets up the environment automatically.
+The ToyBox installer allows any Linux system to fully rebuild ToyBox from scratch using a single command copied directly from this README. It automatically creates the folder tree, installs dependencies, pulls the GitHub repository, installs active modules, and sets up the environment with zero manual configuration.
 
-Later, additional OS installers (Windows, macOS, Android/Termux, iOS) can be added to the README.md using the same pattern.
+This installer is designed to be simple, modular, and future‑proof. As ToyBox grows, additional OS installers (Windows, macOS, Android/Termux, iOS) can be added to this README using the same pattern.
+
+---
 
 ## One‑Line Install Command (Linux)
+
 Copy and paste this into any Linux terminal:
 
 curl -s https://raw.githubusercontent.com/p17550035-commits/toybox/main/install.sh | bash
 
 This command will:
-1. Download the installer script from GitHub.
-2. Execute it automatically.
-3. Build the entire ToyBox environment.
+- Download the installer script directly from GitHub
+- Execute it automatically
+- Build the entire ToyBox environment
+- Install active modules
+- Start the ToyBox server
+
+---
 
 ## Installer Responsibilities
-The installer performs the following steps:
 
-1. **Check for git**
-   - If missing, prompt user to install it.
+The installer performs the following steps in order:
 
-2. **Clone or update the ToyBox repo**
-   - If ~/toybox does not exist:
-     git clone https://github.com/<YOUR_GITHUB_USERNAME>/toybox.git
-   - If it does exist:
-     cd toybox && git pull
+### 1. Check for git
+ToyBox requires Git to pull the repository.  
+If Git is missing, the installer will notify the user and stop.
 
-3. **Create folder tree**
-   Ensures the following structure exists:
-   toybox/
-       main.py
-       router.py
-       loader.py
-       toggles.py
-       modules/
-       ui/
+### 2. Clone or update the ToyBox repo
 
-4. **Install Python + dependencies**
-   - python3
-   - pip
-   - fastapi
-   - uvicorn
-   - any module‑specific dependencies
+If ToyBox is not installed:
 
-5. **Install active modules**
-   For each module folder:
-   - Read config.json
-   - If "enabled": true:
-       bash install.sh
+git clone https://github.com/p17550035-commits/toybox.git ~/toybox
 
-6. **Start ToyBox**
-   uvicorn main:app --host 0.0.0.0 --port 8080
+If ToyBox already exists:
 
-7. **Print UI URL**
-   http://localhost:8080/ui
+cd ~/toybox  
+git pull
+
+This ensures the system always uses the latest version of ToyBox.
+
+### 3. Create the folder tree
+
+The installer ensures the following structure exists:
+
+toybox/  
+    main.py  
+    router.py  
+    loader.py  
+    toggles.py  
+    modules/  
+    ui/
+
+Missing folders are created automatically.
+
+### 4. Install Python + dependencies
+
+The installer ensures the following are installed:
+
+- python3  
+- pip  
+- fastapi  
+- uvicorn  
+- any module‑specific dependencies  
+
+### 5. Install active modules
+
+For each module inside `modules/`:
+
+1. Read its config.json  
+2. If "enabled": true  
+3. Run its install.sh script  
+
+### 6. Start ToyBox
+
+The installer launches the ToyBox server:
+
+uvicorn main:app --host 0.0.0.0 --port 8080
+
+### 7. Print the UI URL
+
+After installation, the installer prints:
+
+ToyBox UI available at:  
+http://localhost:8080/ui
+
+---
 
 ## Installer Script (Skeleton)
-This is the structure the final install.sh will follow:
 
-#!/bin/bash
+The final install.sh follows this structure:
 
-# 1. Check for git
-# 2. Clone or update repo
-# 3. Create folder tree
-# 4. Install Python + dependencies
-# 5. Install active modules
-# 6. Start ToyBox
+#!/bin/bash  
+# 1. Check for git  
+# 2. Clone or update repo  
+# 3. Create folder tree  
+# 4. Install Python + dependencies  
+# 5. Install active modules  
+# 6. Start ToyBox  
+
+The full version is implemented in install.sh at the root of this repository.
+
+---
 
 ## Cross‑OS Strategy (Future)
-Once the Linux installer is stable, additional installers can be added to README.md:
+
+Once the Linux installer is stable, additional installers will be added to this README.
 
 ### Windows (PowerShell)
-Invoke-WebRequest https://raw.githubusercontent.com/<YOU>/toybox/main/install.ps1 -UseBasicParsing | Invoke-Expression
+
+Invoke-WebRequest https://raw.githubusercontent.com/p17550035-commits/toybox/main/install.ps1 -UseBasicParsing | Invoke-Expression
 
 ### macOS (bash/zsh)
-curl -s https://raw.githubusercontent.com/<YOU>/toybox/main/install_mac.sh | bash
 
-### Android/Termux
-curl -s https://raw.githubusercontent.com/<YOU>/toybox/main/install_termux.sh | bash
+curl -s https://raw.githubusercontent.com/p17550035-commits/toybox/main/install_mac.sh | bash
 
-### iOS (Pythonista/Pyto)
-Copy/paste Python installer snippet into Pythonista/Pyto.
+### Android / Termux
+
+curl -s https://raw.githubusercontent.com/p17550035-commits/toybox/main/install_termux.sh | bash
+
+### iOS (Pythonista / Pyto)
+
+A Python installer snippet will be added for iOS users once the mobile build is ready.
+
+---
 
 ## Notes
-- Installer must remain simple and modular.
-- Installer must never modify module logic.
-- Installer must only run install.sh for active modules.
-- Installer must always pull the latest repo version.
-- Installer must always rebuild the folder tree if missing.
+
+- The installer must remain simple and modular.  
+- The installer must never modify module logic.  
+- Only active modules (enabled: true) are installed or updated.  
+- The installer always pulls the latest version of ToyBox.  
+- The installer rebuilds the folder tree if missing.  
+- The Linux installer is the primary supported installer at this stage.
+
+---
 
 ## Summary
-This installer system ensures ToyBox can be rebuilt on any Linux machine using a single command from README.md. As ToyBox grows, additional OS installers can be added without changing the core Linux installer.
+
+The ToyBox installer ensures that any Linux machine can rebuild ToyBox from scratch using a single command from this README. As ToyBox grows, additional OS installers will be added without changing the core Linux installer. This keeps ToyBox portable, modular, and easy to deploy anywhere.
