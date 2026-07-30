@@ -11,7 +11,7 @@ Later, additional OS installers (Windows, macOS, Android/Termux, iOS) can be add
 ## One‑Line Install Command (Linux)
 Copy and paste this into any Linux terminal:
 
-curl -s https://raw.githubusercontent.com/<YOUR_GITHUB_USERNAME>/toybox/main/install.sh | bash
+curl -s https://raw.githubusercontent.com/p17550035-commits/toybox/main/install.sh | bash
 
 This command will:
 1. Download the installer script from GitHub.
