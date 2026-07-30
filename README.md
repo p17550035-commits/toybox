@@ -2,6 +2,8 @@
 Fully modular toolbox
 
 # ToyBox Installer (Linux First)
+visit the website for easier copy links
+https://p17550035-commits.github.io/toybox/
 
 ## Overview
 The ToyBox installer allows any Linux system to fully rebuild ToyBox from scratch using a single command copied directly from this README. It automatically creates the folder tree, installs dependencies, pulls the GitHub repository, installs active modules, and sets up the environment with zero manual configuration.
