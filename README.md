@@ -14,7 +14,7 @@ This installer is designed to be simple, modular, and future‑proof. As ToyBox 
 
 Copy and paste this into any Linux terminal:
 
-curl -s https://raw.githubusercontent.com/p17550035-commits/toybox/main/install.sh | bash
+```curl -s https://raw.githubusercontent.com/p17550035-commits/toybox/main/install.sh | bash```
 
 This command will:
 - Download the installer script directly from GitHub
