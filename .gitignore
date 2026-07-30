@@ -1,0 +1,39 @@
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Virtual environments
+venv/
+.env/
+.env.local
+.env.*.backup
+
+# Secrets (only ignore sensitive configs)
+*.key
+*.pem
+*.crt
+*.token
+*.secret
+modules/*/config.secret.json
+
+# Termux / device-specific junk
+$PREFIX/
+*.log
+*.bak
+
+# OS junk
+.DS_Store
+Thumbs.db
+
+# Editor junk
+.vscode/
+.idea/
+
+# Build artifacts
+dist/
+build/
+
+# Node junk (if frontend tooling ever added)
+node_modules/
