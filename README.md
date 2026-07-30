@@ -37,7 +37,7 @@ If Git is missing, the installer will notify the user and stop.
 
 If ToyBox is not installed:
 
-git clone https://github.com/p17550035-commits/toybox.git ~/toybox
+```git clone https://github.com/p17550035-commits/toybox.git ~/toybox```
 
 If ToyBox already exists:
 
