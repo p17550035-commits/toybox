@@ -147,3 +147,36 @@ Each module is fully isolated:
 - No plugin hell.
 - No Termux pain.
 
+- ## Installer Workflow Options
+- 
+These are the three workflow options used after setting up the installer and README. They define how development continues entirely inside GitHub, avoiding Termux issues and keeping the project clean and modular.
+
+## Option 1 — Generate install.sh (Skeleton)
+Create the initial install.sh script inside the repo.  
+This script will:
+- Build the folder tree
+- Install dependencies
+- Install active modules
+- Start ToyBox
+
+This is the foundation for the one‑line installer in README.md.
+
+## Option 2 — Generate README.md Installer Section
+Add the one‑line installer command to README.md:
+
+curl -s https://raw.githubusercontent.com/<YOUR_GITHUB_USERNAME>/toybox/main/install.sh | bash
+
+This allows ToyBox to be installed on any Linux system using a single copy‑paste command.
+
+## Option 3 — Integrate Installer Into Task List
+Add installer tasks to the main project task list:
+- Create installer blueprint
+- Create install.sh
+- Add GitHub sync logic
+- Test installer on clean system
+- Test module auto‑install
+- Test update.sh via installer
+- Lock installer
+- Document installer rules
+
+This ensures the installer becomes part of the official ToyBox development workflow.
