@@ -115,15 +115,15 @@ Once the Linux installer is stable, additional installers will be added to this 
 
 ### Windows (PowerShell)
 
-Invoke-WebRequest https://raw.githubusercontent.com/p17550035-commits/toybox/main/install.ps1 -UseBasicParsing | Invoke-Expression
+```Invoke-WebRequest https://raw.githubusercontent.com/p17550035-commits/toybox/main/install.ps1 -UseBasicParsing | Invoke-Expression```
 
 ### macOS (bash/zsh)
 
-curl -s https://raw.githubusercontent.com/p17550035-commits/toybox/main/install_mac.sh | bash
+```curl -s https://raw.githubusercontent.com/p17550035-commits/toybox/main/install_mac.sh | bash```
 
 ### Android / Termux
 
-curl -s https://raw.githubusercontent.com/p17550035-commits/toybox/main/install_termux.sh | bash
+```curl -s https://raw.githubusercontent.com/p17550035-commits/toybox/main/install_termux.sh | bash```
 
 ### iOS (Pythonista / Pyto)
 
