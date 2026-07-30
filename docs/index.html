@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>ToyBox Installer Portal</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background: #111;
+        color: #eee;
+        margin: 0;
+        padding: 0;
+    }
+    header {
+        background: #222;
+        padding: 20px;
+        text-align: center;
+        font-size: 28px;
+        font-weight: bold;
+        color: #0f0;
+    }
+    .container {
+        padding: 20px;
+        max-width: 900px;
+        margin: auto;
+    }
+    h2 {
+        color: #0f0;
+        margin-top: 40px;
+    }
+    .block {
+        background: #1a1a1a;
+        padding: 20px;
+        border-radius: 10px;
+        margin-bottom: 25px;
+        border: 1px solid #333;
+    }
+    button {
+        background: #0f0;
+        color: #000;
+        padding: 10px 16px;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        font-size: 16px;
+        margin-top: 10px;
+    }
+    button:hover {
+        background: #5f5;
+    }
+    pre {
+        background: #000;
+        padding: 12px;
+        border-radius: 6px;
+        overflow-x: auto;
+        color: #0f0;
+    }
+    .footer {
+        text-align: center;
+        padding: 30px;
+        color: #666;
+    }
+</style>
+
+<script>
+function copyText(text) {
+    navigator.clipboard.writeText(text);
+    alert("Copied to clipboard:\n" + text);
+}
+</script>
+
+</head>
+<body>
+
+<header>ToyBox Installer Portal</header>
+
+<div class="container">
+
+    <h2>Linux Installer (Full Install)</h2>
+    <div class="block">
+        <p>Copy and paste this into any Linux terminal:</p>
+        <pre>curl -s https://raw.githubusercontent.com/p17550035-commits/toybox/main/install.sh | bash</pre>
+        <button onclick="copyText('curl -s https://raw.githubusercontent.com/p17550035-commits/toybox/main/install.sh | bash')">
+            Copy Linux Install Command
+        </button>
+    </div>
+
+    <h2>Linux Installer (Modules Only)</h2>
+    <div class="block">
+        <pre>curl -s https://raw.githubusercontent.com/p17550035-commits/toybox/main/install.sh | bash -s -- --modules-only</pre>
+        <button onclick="copyText('curl -s https://raw.githubusercontent.com/p17550035-commits/toybox/main/install.sh | bash -s -- --modules-only')">
+            Copy Modules-Only Command
+        </button>
+    </div>
+
+    <h2>Linux Installer (Update Modules)</h2>
+    <div class="block">
+        <pre>curl -s https://raw.githubusercontent.com/p17550035-commits/toybox/main/install.sh | bash -s -- --update-modules</pre>
+        <button onclick="copyText('curl -s https://raw.githubusercontent.com/p17550035-commits/toybox/main/install.sh | bash -s -- --update-modules')">
+            Copy Update Command
+        </button>
+    </div>
+
+    <h2>Android / Termux Installer</h2>
+    <div class="block">
+        <pre>curl -s https://raw.githubusercontent.com/p17550035-commits/toybox/main/install_termux.sh | bash</pre>
+        <button onclick="copyText('curl -s https://raw.githubusercontent.com/p17550035-commits/toybox/main/install_termux.sh | bash')">
+            Copy Termux Install Command
+        </button>
+    </div>
+
+    <h2>macOS Installer</h2>
+    <div class="block">
+        <pre>curl -s https://raw.githubusercontent.com/p17550035-commits/toybox/main/install_mac.sh | bash</pre>
+        <button onclick="copyText('curl -s https://raw.githubusercontent.com/p17550035-commits/toybox/main/install_mac.sh | bash')">
+            Copy macOS Install Command
+        </button>
+    </div>
+
+    <h2>Windows Installer (PowerShell)</h2>
+    <div class="block">
+        <pre>Invoke-WebRequest https://raw.githubusercontent.com/p17550035-commits/toybox/main/install.ps1 -UseBasicParsing | Invoke-Expression</pre>
+        <button onclick="copyText('Invoke-WebRequest https://raw.githubusercontent.com/p17550035-commits/toybox/main/install.ps1 -UseBasicParsing | Invoke-Expression')">
+            Copy Windows Install Command
+        </button>
+    </div>
+
+    <h2>ToyBox UI</h2>
+    <div class="block">
+        <p>After installation, ToyBox UI is available at:</p>
+        <a href="http://localhost:8080/ui" style="color:#0f0;">http://localhost:8080/ui</a>
+    </div>
+
+</div>
+
+<div class="footer">
+    ToyBox © 2026 — Fully Modular Toolbox
+</div>
+
+</body>
+</html>
