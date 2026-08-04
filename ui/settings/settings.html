@@ -1,0 +1,102 @@
+<!-- settings.html — FULL REPLACEMENT (with backend settings toggles)
+     Updated: 2026-08-04 @ 05:10 EDT
+     Author: Copilot + Peter
+     Purpose: Dynamic Settings page for ToyBox (loads + saves settings.json)
+-->
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Settings</title>
+
+    <!-- Correct folder-based CSS -->
+    <link rel="stylesheet" href="/ui/settings/settings.css">
+    <link rel="stylesheet" href="/ui/frontend/navigation.css">
+
+    <!-- Correct folder-based JS -->
+    <script src="/ui/settings/settings.js"></script>
+</head>
+
+<body>
+
+<!-- NAV BAR INJECTION -->
+<div id="nav"></div>
+<script>
+async function injectNav() {
+    try {
+        // FIX: /ui/nav no longer exists — use generated_nav.html
+        const res = await fetch("/ui/frontend/generated_nav.html");
+        const html = await res.text();
+        document.getElementById("nav").innerHTML = html;
+    } catch (e) {
+        document.getElementById("nav").innerHTML =
+            "<div style='padding:10px;background:#300;color:#f88;border-bottom:1px solid #600;'>Navigation failed to load</div>";
+    }
+}
+injectNav();
+</script>
+
+<h1 class="settings-title">Settings</h1>
+<p class="settings-subtitle">
+    Configure ToyBox system preferences and module behavior.
+</p>
+
+<!-- SETTINGS CARD -->
+<div class="settings-card">
+
+    <!-- Settings form (JS-driven, no HTML form submit) -->
+    <div id="settings-form">
+
+        <!-- Existing fields -->
+        <label class="settings-label">ToyBox Title</label>
+        <input class="settings-input" id="toybox_title" type="text">
+
+        <label class="settings-label">Default Module Category</label>
+        <input class="settings-input" id="default_category" type="text">
+
+        <label class="settings-label">Developer Mode</label>
+        <select class="settings-input" id="developer_mode">
+            <option value="off">Off</option>
+            <option value="on">On</option>
+        </select>
+
+        <label class="settings-label">Notes</label>
+        <textarea class="settings-input" id="notes"></textarea>
+
+        <!-- NEW: Global backend settings -->
+        <div class="settings-toggle-row">
+            <span class="settings-label">Verbose Logging</span>
+            <label class="settings-checkbox">
+                <input type="checkbox" id="verbose_logging">
+                Enable
+            </label>
+        </div>
+
+        <div class="settings-toggle-row">
+            <span class="settings-label">Safe Mode</span>
+            <label class="settings-checkbox">
+                <input type="checkbox" id="safe_mode">
+                Enable
+            </label>
+        </div>
+
+        <label class="settings-label">UI Theme</label>
+        <select class="settings-input" id="ui_theme">
+            <option value="dark">Dark</option>
+            <option value="light">Light</option>
+        </select>
+
+        <label class="settings-label">Version</label>
+        <input class="settings-input" id="version" type="text" readonly>
+
+        <!-- Buttons -->
+        <div class="settings-button-row">
+            <button class="settings-button" onclick="saveSettings()">Save Settings</button>
+            <button class="settings-button" onclick="resetSettings()">Reset to Default</button>
+        </div>
+
+    </div>
+</div>
+
+</body>
+</html>

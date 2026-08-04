@@ -1,0 +1,79 @@
+<!-- logs.html — FULL REPLACEMENT (main + verbose tabs)
+     Updated: 2026-08-04 @ 04:30 EDT
+     Author: Copilot + Peter
+     Purpose: Dual-tab Logs viewer (main + verbose)
+-->
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Logs</title>
+
+    <!-- Correct folder-based CSS -->
+    <link rel="stylesheet" href="/ui/logs/logs.css">
+    <link rel="stylesheet" href="/ui/frontend/navigation.css">
+
+    <!-- Correct folder-based JS -->
+    <script src="/ui/logs/logs.js"></script>
+</head>
+
+<body>
+
+<!-- NAV BAR INJECTION -->
+<div id="nav"></div>
+<script>
+async function injectNav() {
+    try {
+        // FIX: /ui/nav no longer exists — use generated_nav.html
+        const res = await fetch("/ui/frontend/generated_nav.html");
+        const html = await res.text();
+        document.getElementById("nav").innerHTML = html;
+    } catch (e) {
+        document.getElementById("nav").innerHTML =
+            "<div style='padding:10px;background:#300;color:#f88;border-bottom:1px solid #600;'>Navigation failed to load</div>";
+    }
+}
+injectNav();
+</script>
+
+<h1 class="logs-title">Logs</h1>
+<p class="logs-subtitle">
+    View system logs, filter by severity, and auto-scroll new entries.
+</p>
+
+<!-- LOG CONTROLS -->
+<div class="logs-controls">
+
+    <select id="log-filter" class="logs-select">
+        <option value="all">All</option>
+        <option value="info">Info</option>
+        <option value="warn">Warnings</option>
+        <option value="error">Errors</option>
+    </select>
+
+    <label class="logs-checkbox" style="display:flex;align-items:center;gap:6px;">
+        <input type="checkbox" id="log-autoscroll" checked>
+        Auto-scroll
+    </label>
+
+    <button id="log-refresh" class="logs-button">Refresh</button>
+</div>
+
+<!-- LOG TABS -->
+<div class="log-tabs">
+    <div id="main-log-tab" class="log-tab active">Main Logs</div>
+    <div id="verbose-log-tab" class="log-tab">Verbose Logs</div>
+</div>
+
+<!-- MAIN LOG CONTAINER -->
+<div id="main-log-container">
+    <div id="log-box"></div>
+</div>
+
+<!-- VERBOSE LOG CONTAINER -->
+<div id="verbose-log-container">
+    <div id="verbose-log-box"></div>
+</div>
+
+</body>
+</html>

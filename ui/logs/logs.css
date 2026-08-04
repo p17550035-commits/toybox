@@ -1,0 +1,184 @@
+/* logs.css — FULL REPLACEMENT (main + verbose tabs)
+ * Updated: 2026-08-04 @ 04:25 EDT
+ * Author: Copilot + Peter
+ * Purpose: Fluent-style dark Logs page for ToyBox
+ * Notes:
+ *   - Adds tab bar for main/verbose logs
+ *   - Adds second log viewer (#verbose-log-box)
+ */
+
+/* -------------------------------------------------------------
+   PAGE WRAPPER
+------------------------------------------------------------- */
+body {
+    font-family: system-ui, sans-serif;
+    background: #111;
+    color: #eee;
+    margin: 0;
+    padding: 16px;
+}
+
+/* -------------------------------------------------------------
+   LOGS TITLE
+------------------------------------------------------------- */
+.logs-title {
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 10px;
+    color: #fafafa;
+}
+
+/* -------------------------------------------------------------
+   SUBTITLE
+------------------------------------------------------------- */
+.logs-subtitle {
+    font-size: 16px;
+    color: #bbb;
+    margin-bottom: 20px;
+}
+
+/* -------------------------------------------------------------
+   LOG CONTROLS
+------------------------------------------------------------- */
+.logs-controls {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+
+.logs-select,
+.logs-checkbox,
+.logs-button {
+    padding: 10px 14px;
+    border-radius: 8px;
+    border: 1px solid #444;
+    background: #181818;
+    color: #eee;
+    cursor: pointer;
+}
+
+.logs-button:hover {
+    background: #333;
+}
+
+/* -------------------------------------------------------------
+   TAB BAR (main / verbose)
+------------------------------------------------------------- */
+.log-tabs {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.log-tab {
+    padding: 10px 16px;
+    background: #181818;
+    border: 1px solid #333;
+    border-radius: 8px;
+    cursor: pointer;
+    color: #ccc;
+    font-weight: 600;
+    user-select: none;
+}
+
+.log-tab:hover {
+    background: #262626;
+}
+
+.log-tab.active {
+    background: #333;
+    color: #fff;
+    border-color: #555;
+}
+
+/* -------------------------------------------------------------
+   MAIN LOG CONTAINER
+------------------------------------------------------------- */
+#main-log-container {
+    display: block;
+}
+
+#log-box {
+    background: #000;
+    border: 1px solid #333;
+    padding: 15px;
+    border-radius: 10px;
+    height: 70vh;
+    overflow-y: auto;
+    white-space: pre-wrap;
+    font-family: monospace;
+    font-size: 13px;
+}
+
+/* -------------------------------------------------------------
+   VERBOSE LOG CONTAINER
+------------------------------------------------------------- */
+#verbose-log-container {
+    display: none; /* hidden until tab switch */
+}
+
+#verbose-log-box {
+    background: #050505;
+    border: 1px solid #333;
+    padding: 15px;
+    border-radius: 10px;
+    height: 70vh;
+    overflow-y: auto;
+    white-space: pre-wrap;
+    font-family: monospace;
+    font-size: 13px;
+    color: #ccc;
+}
+
+/* -------------------------------------------------------------
+   LOG ENTRY COLORS (main)
+------------------------------------------------------------- */
+.entry {
+    padding: 4px 6px;
+    margin-bottom: 6px;
+    border-radius: 4px;
+}
+
+.entry.info {
+    color: #4caf50;   /* green */
+}
+
+.entry.warn {
+    color: #ff9800;   /* orange */
+}
+
+.entry.error {
+    color: #f44336;   /* red */
+}
+
+/* -------------------------------------------------------------
+   VERBOSE ENTRY STYLE
+------------------------------------------------------------- */
+.entry.verbose {
+    color: #9ecbff; /* light blue debug text */
+}
+
+/* -------------------------------------------------------------
+   MOBILE-FIRST
+------------------------------------------------------------- */
+@media (min-width: 800px) {
+    body {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    #log-box,
+    #verbose-log-box {
+        width: 800px;
+    }
+
+    .logs-controls {
+        width: 800px;
+    }
+
+    .log-tabs {
+        width: 800px;
+    }
+}

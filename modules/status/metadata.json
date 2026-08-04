@@ -1,0 +1,6 @@
+{
+    "name": "status",
+    "description": "System status dashboard module",
+    "category": "system",
+    "page_type": "fluent"
+}

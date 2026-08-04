@@ -1,0 +1,154 @@
+/* settings.css — FULL REPLACEMENT (with checkbox/toggle support)
+ * Updated: 2026-08-04 @ 05:05 EDT
+ * Author: Copilot + Peter
+ * Purpose: Fluent-style dark Settings page for ToyBox
+ * Notes:
+ *   - Adds checkbox + toggle row styling for new backend settings
+ */
+
+/* -------------------------------------------------------------
+   PAGE WRAPPER
+------------------------------------------------------------- */
+body {
+    font-family: system-ui, sans-serif;
+    background: #111;
+    color: #eee;
+    margin: 0;
+    padding: 16px;
+}
+
+/* -------------------------------------------------------------
+   SETTINGS TITLE
+------------------------------------------------------------- */
+.settings-title {
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 10px;
+    color: #fafafa;
+}
+
+/* -------------------------------------------------------------
+   SUBTITLE
+------------------------------------------------------------- */
+.settings-subtitle {
+    font-size: 16px;
+    color: #bbb;
+    margin-bottom: 20px;
+}
+
+/* -------------------------------------------------------------
+   SETTINGS CARD
+------------------------------------------------------------- */
+.settings-card {
+    background: #1b1b1b;
+    border: 1px solid #333;
+    border-radius: 12px;
+    padding: 20px;
+    margin-top: 20px;
+}
+
+/* -------------------------------------------------------------
+   LABELS
+------------------------------------------------------------- */
+.settings-label {
+    display: block;
+    margin-top: 12px;
+    margin-bottom: 4px;
+    font-weight: bold;
+    color: #eee;
+}
+
+/* -------------------------------------------------------------
+   INPUTS (text/select/textarea)
+------------------------------------------------------------- */
+.settings-input {
+    width: 100%;
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #444;
+    background: #181818;
+    color: #eee;
+    box-sizing: border-box;
+}
+
+textarea.settings-input {
+    resize: vertical;
+    min-height: 100px;
+}
+
+/* -------------------------------------------------------------
+   CHECKBOXES (new)
+------------------------------------------------------------- */
+.settings-checkbox {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 12px;
+    margin-bottom: 6px;
+    cursor: pointer;
+    color: #eee;
+}
+
+.settings-checkbox input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+    accent-color: #4caf50; /* Fluent green */
+}
+
+/* -------------------------------------------------------------
+   TOGGLE ROW (new)
+------------------------------------------------------------- */
+.settings-toggle-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 0;
+    border-bottom: 1px solid #333;
+}
+
+.settings-toggle-row:last-child {
+    border-bottom: none;
+}
+
+/* -------------------------------------------------------------
+   BUTTONS
+------------------------------------------------------------- */
+.settings-button {
+    padding: 12px 20px;
+    border-radius: 8px;
+    border: 1px solid #555;
+    background: #333;
+    color: #eee;
+    cursor: pointer;
+    font-size: 15px;
+    margin-top: 20px;
+}
+
+.settings-button:hover {
+    background: #444;
+}
+
+/* -------------------------------------------------------------
+   BUTTON ROW
+------------------------------------------------------------- */
+.settings-button-row {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+/* -------------------------------------------------------------
+   MOBILE-FIRST
+------------------------------------------------------------- */
+@media (min-width: 800px) {
+    body {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .settings-card {
+        width: 800px;
+    }
+}

@@ -1,0 +1,62 @@
+<!-- dashboard.html — FULL REPLACEMENT
+     Updated: 2026-08-04 @ 02:03 EDT
+     Author: Copilot + Peter
+     Purpose: Main Dashboard page for ToyBox, showing module status + toggles
+-->
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dashboard</title>
+
+    <!-- Correct folder-based CSS -->
+    <link rel="stylesheet" href="/ui/dashboard/dashboard.css">
+    <link rel="stylesheet" href="/ui/frontend/navigation.css">
+
+    <!-- Correct folder-based JS -->
+    <script src="/ui/dashboard/dashboard.js"></script>
+    <script src="/ui/dashboard/toggle.js"></script>
+</head>
+
+<body>
+
+<!-- NAV BAR INJECTION -->
+<div id="nav"></div>
+<script>
+async function injectNav() {
+    try {
+        // ⭐ FIXED: correct nav path + cache bust
+        const res = await fetch("/ui/frontend/generated_nav.html?cache=" + Date.now());
+        const html = await res.text();
+        document.getElementById("nav").innerHTML = html;
+    } catch (e) {
+        document.getElementById("nav").innerHTML =
+            "<div style='padding:10px;background:#300;color:#f88;border-bottom:1px solid #600;'>Navigation failed to load</div>";
+    }
+}
+injectNav();
+</script>
+
+<h1 class="dashboard-title">Dashboard</h1>
+<p class="dashboard-subtitle">
+    Overview of ToyBox modules, toggles, and system status.
+</p>
+
+<!-- MODULE STATUS LIST -->
+<div class="dashboard-card">
+    <h2>Module Status</h2>
+    <div id="module-status-list" class="module-status-list"></div>
+</div>
+
+<!-- TOGGLE SECTION -->
+<div class="dashboard-card">
+    <h2>Feature Toggles</h2>
+    <div id="dashboard-toggle-container"></div>
+</div>
+
+<!-- OPTIONAL: Eruda mobile devtools -->
+<script src="/node_modules/eruda/eruda.js"></script>
+<script>eruda.init();</script>
+
+</body>
+</html>

@@ -1,65 +1,161 @@
+# router.py — CLEAN FOLDER-BASED ROUTER (FIXED)
+# Built-in pages use explicit routes
+# Modules use dynamic routing only
+
 from fastapi import APIRouter, Request
-from fastapi.responses import HTMLResponse, JSONResponse
-from ui.page_loader import load_builtin_page, load_module_page
+from fastapi.responses import HTMLResponse, JSONResponse, FileResponse
+
 from ui.builder import builder_create_from_json, builder_delete_from_json
-from core.toggles import set_toggle, load_toggles
+from core.toggles import load_toggles, set_toggle
 from core.lifecycle import activate_module, deactivate_module
+from core.logger import read_logs, read_verbose_logs
+from core.settings import load_settings, save_settings, DEFAULT_SETTINGS
+
+import importlib.util
 
 router = APIRouter()
 
-# ---------------------------
-# Built-in UI pages
-# ---------------------------
-@router.get("/ui/{page}", response_class=HTMLResponse)
-def serve_builtin_page(page: str):
-    return load_builtin_page(page)
+# ------------------------------------------------------------
+# Helpers
+# ------------------------------------------------------------
 
-# ---------------------------
-# Module UI pages
-# ---------------------------
-@router.get("/modules/{name}", response_class=HTMLResponse)
+def sanitize_name(name: str) -> str:
+    safe = "".join(c for c in name if c.isalnum() or c in ("_", "-"))
+    return safe.lower()
+
+# ------------------------------------------------------------
+# BUILT-IN UI PAGES (EXPLICIT ROUTES)
+# ------------------------------------------------------------
+
+@router.get("/ui/tools", response_class=FileResponse)
+def ui_tools():
+    return FileResponse("ui/tools/tools.html")
+
+@router.get("/ui/builder", response_class=FileResponse)
+def ui_builder():
+    return FileResponse("ui/builder/builder.html")
+
+@router.get("/ui/dashboard", response_class=FileResponse)
+def ui_dashboard():
+    return FileResponse("ui/dashboard/dashboard.html")
+
+@router.get("/ui/settings", response_class=FileResponse)
+def ui_settings():
+    return FileResponse("ui/settings/settings.html")
+
+@router.get("/ui/logs", response_class=FileResponse)
+def ui_logs():
+    return FileResponse("ui/logs/logs.html")
+
+# ------------------------------------------------------------
+# MODULE UI PAGES (DYNAMIC)
+# ------------------------------------------------------------
+
+@router.get("/modules/{name}", response_class=FileResponse)
 def serve_module_page(name: str):
-    return load_module_page(name)
+    name = sanitize_name(name)
+    return FileResponse(f"modules/{name}/{name}.html")
 
-# ---------------------------
-# Builder: Create Module
-# ---------------------------
+# ------------------------------------------------------------
+# MODULE RUN ENDPOINT (DYNAMIC)
+# ------------------------------------------------------------
+
+@router.get("/modules/{name}/run")
+def module_run(name: str):
+    name = sanitize_name(name)
+    module_path = f"modules/{name}/run.py"
+
+    spec = importlib.util.spec_from_file_location(f"{name}_run", module_path)
+    mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mod)
+
+    return mod.run()
+
+# ------------------------------------------------------------
+# BUILDER: CREATE MODULE (JSON VERSION — FIXED)
+# ------------------------------------------------------------
+
 @router.post("/builder/create")
 async def builder_create(request: Request):
     data = await request.json()
-    result = builder_create_from_json(data)
+    builder_create_from_json(data)
     return JSONResponse({"status": "ok", "message": f"Module '{data.get('name')}' created."})
 
-# ---------------------------
-# Builder: Delete Module
-# ---------------------------
+# ------------------------------------------------------------
+# BUILDER: DELETE MODULE
+# ------------------------------------------------------------
+
 @router.post("/builder/delete")
 async def builder_delete(request: Request):
     data = await request.json()
-    name = data.get("name")
+    name = sanitize_name(data.get("name"))
     builder_delete_from_json(name)
     return JSONResponse({"status": "ok", "message": f"Module '{name}' deleted."})
 
-# ---------------------------
-# Builder: List Modules
-# ---------------------------
+# ------------------------------------------------------------
+# BUILDER: LIST MODULES
+# ------------------------------------------------------------
+
 @router.get("/builder/list")
 def builder_list():
     toggles = load_toggles()
     return JSONResponse({"modules": list(toggles.keys())})
 
-# ---------------------------
-# Tools: Toggle ON/OFF
-# ---------------------------
+# ------------------------------------------------------------
+# TOOLS: TOGGLE ON/OFF
+# ------------------------------------------------------------
+
 @router.post("/tools/toggle")
 async def toggle_module(request: Request):
     data = await request.json()
-    name = data.get("name")
-    state = data.get("state")
+    return set_toggle(data)
 
-    if state:
-        activate_module(name)
-    else:
-        deactivate_module(name)
+# ------------------------------------------------------------
+# LOGS (MAIN)
+# ------------------------------------------------------------
 
-    return JSONResponse({"status": "ok", "module": name, "state": state})
+@router.get("/logs")
+def get_logs():
+    return HTMLResponse(read_logs())
+
+# ------------------------------------------------------------
+# VERBOSE LOGS (DEBUG)
+# ------------------------------------------------------------
+
+@router.get("/verbose_logs")
+def get_verbose_logs():
+    return HTMLResponse(read_verbose_logs())
+
+# ------------------------------------------------------------
+# SETTINGS: GET
+# ------------------------------------------------------------
+
+@router.get("/settings/get")
+def settings_get():
+    settings = load_settings()
+    return JSONResponse({"settings": settings})
+
+# ------------------------------------------------------------
+# SETTINGS: SAVE
+# ------------------------------------------------------------
+
+@router.post("/settings/save")
+async def settings_save(request: Request):
+    data = await request.json()
+    try:
+        save_settings(data)
+        return JSONResponse({"status": "ok", "message": "Settings saved."})
+    except Exception as e:
+        return JSONResponse({"error": f"Failed to save settings: {e}"})
+
+# ------------------------------------------------------------
+# SETTINGS: RESET
+# ------------------------------------------------------------
+
+@router.post("/settings/reset")
+def settings_reset():
+    try:
+        save_settings(DEFAULT_SETTINGS)
+        return JSONResponse({"status": "ok", "message": "Settings reset to defaults."})
+    except Exception as e:
+        return JSONResponse({"error": f"Failed to reset settings: {e}"})

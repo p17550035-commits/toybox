@@ -1,4 +1,18 @@
 {
-  "example": true,
-  "api": true
+  "_meta": {
+    "file": "toggles.json",
+    "updated": "2026-08-04 @ 05:50 EDT",
+    "author": "Copilot + Peter",
+    "purpose": "Module enable/disable toggle storage for ToyBox",
+    "notes": [
+      "Used by core/toggles.py",
+      "Used by lifecycle.py for activation/deactivation",
+      "Used by router /builder/list",
+      "Used by navigation.py to show/hide module tabs",
+      "Module names must be sanitized (lowercase, alnum, _, -)",
+      "This file auto-expands as new modules are created"
+    ]
+  },
+  "example": false,
+  "status": true
 }

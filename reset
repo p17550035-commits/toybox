@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+
+# Allow: reset nav
+# Future: reset logs, reset settings, etc.
+
+case "$1" in
+    nav)
+        bash ~/toybox/reset_nav
+        ;;
+    *)
+        echo "Usage: reset nav"
+        ;;
+esac

@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+# reset_nav — Hard reset + regenerate navigation
+
+python3 - << 'PYEOF'
+from ui.frontend.navigation import refresh_navigation
+import os
+
+nav_path = "ui/frontend/generated_nav.html"
+
+if os.path.exists(nav_path):
+    os.remove(nav_path)
+    print("[ToyBox] HARD RESET: deleted old generated_nav.html")
+else:
+    print("[ToyBox] HARD RESET: file did not exist")
+
+refresh_navigation()
+print("[ToyBox] HARD RESET: regenerated navigation")
+PYEOF

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Tools</title>
+
+    <!-- Correct folder-based CSS paths -->
+    <link rel="stylesheet" href="/ui/tools/tools.css">
+    <link rel="stylesheet" href="/ui/frontend/navigation.css">
+</head>
+<body>
+
+<div id="nav"></div>
+<script>
+(async () => {
+    try {
+        // ⭐ FIXED: correct nav path + cache bust
+        const res = await fetch("/ui/frontend/generated_nav.html?cache=" + Date.now());
+        document.getElementById("nav").innerHTML = await res.text();
+    } catch {
+        document.getElementById("nav").innerHTML =
+            "<div style='padding:10px;background:#300;color:#f88;border-bottom:1px solid #600;'>Navigation failed to load</div>";
+    }
+})();
+</script>
+
+<div class="tools-container">
+
+    <div class="tools-tile">
+        <h1>Tools</h1>
+        <p>Manage modules, toggle features, and open the Module Builder.</p>
+    </div>
+
+    <div class="tools-tile">
+        <h2>Feature Toggles</h2>
+        <div id="toggle-list"></div>
+    </div>
+
+    <div class="tools-tile">
+        <h2>Installed Modules</h2>
+        <div id="module-list"></div>
+    </div>
+
+    <div class="tools-tile">
+        <h2>Module Builder</h2>
+        <a href="/ui/builder" class="tools-button">Open Builder</a>
+    </div>
+
+</div>
+
+<!-- Correct folder-based JS path -->
+<script src="/ui/tools/tools.js"></script>
+
+</body>
+</html>

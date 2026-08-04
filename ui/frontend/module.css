@@ -1,0 +1,67 @@
+body {
+    font-family: sans-serif;
+    padding: 20px;
+    background: #f4f4f4;
+}
+
+/* Header card */
+.tool-card {
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    margin-bottom: 25px;
+}
+
+/* Section box */
+.tool-section {
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    margin-bottom: 25px;
+}
+
+/* Grid layout */
+.tool-grid {
+    display: grid;
+    grid-template-columns: 160px 1fr;
+    gap: 14px 20px;
+    margin-top: 10px;
+}
+
+/* Labels */
+.tool-label {
+    font-weight: bold;
+    padding-top: 6px;
+}
+
+/* Inputs */
+.tool-input {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #bbb;
+    border-radius: 6px;
+    background: #fafafa;
+    font-family: sans-serif;
+}
+
+/* Textareas */
+textarea.tool-input {
+    height: 120px;
+}
+
+/* Buttons */
+.tool-button {
+    margin-top: 20px;
+    padding: 10px 16px;
+    background: #fff;
+    border: 1px solid #bbb;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.tool-button:hover {
+    background: #e6e6e6;
+}

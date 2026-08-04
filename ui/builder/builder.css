@@ -1,0 +1,99 @@
+/* builder.css — Fluent-style Builder UI
+ * Updated: 2026-08-04 @ 04:46 EDT
+ * Author: Peter + Copilot
+ */
+
+/* GLOBAL */
+body {
+    font-family: system-ui, sans-serif;
+    background: #111;
+    color: #eee;
+    margin: 0;
+    padding: 0;
+}
+
+/* NAV BAR */
+#nav {
+    background: #1a1a1a;
+    padding: 15px;
+    border-bottom: 1px solid #333;
+    margin-bottom: 30px;
+}
+
+/* PAGE CONTAINER — centers everything */
+.builder-container {
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* TILE / CARD */
+.builder-tile {
+    background: #1b1b1b;
+    border: 1px solid #333;
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 25px;
+    box-shadow: 0 0 12px rgba(0,0,0,0.4);
+}
+
+/* LABELS */
+.builder-label {
+    display: block;
+    margin-bottom: 6px;
+    font-weight: bold;
+}
+
+/* INPUTS — fixed height */
+.builder-input {
+    width: 100%;
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #444;
+    background: #181818;
+    color: #eee;
+    height: 42px;
+    box-sizing: border-box;
+}
+
+/* TEXTAREAS — auto expand */
+textarea.builder-input {
+    min-height: 140px;
+    height: auto;
+    resize: vertical;
+    line-height: 1.4;
+}
+
+/* BUTTON */
+.builder-button {
+    margin-top: 20px;
+    padding: 12px 20px;
+    border-radius: 8px;
+    border: 1px solid #555;
+    background: #333;
+    color: #eee;
+    cursor: pointer;
+    width: 100%;
+    font-size: 16px;
+}
+
+.builder-button:hover {
+    background: #444;
+}
+
+/* DELETE SECTION */
+.builder-delete {
+    background: #1b1b1b;
+    border: 1px solid #333;
+    border-radius: 12px;
+    padding: 20px;
+    margin-top: 30px;
+}
+
+/* MOBILE */
+@media (max-width: 799px) {
+    .builder-container {
+        padding: 0 12px;
+    }
+}

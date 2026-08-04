@@ -1,7 +1,7 @@
 from core.toggles import load_toggles
 from core.lifecycle import activate_module, deactivate_module
 from core.registry import register, registry
-from ui.navigation import refresh_navigation   # ← ADDED
+from ui.navigation import refresh_navigation
 
 def led(state):
     return "🟢" if state else "🔴"
@@ -31,7 +31,7 @@ def tools_ui():
         if cmd[0] == "builder":
             from ui.builder import builder_ui
             builder_ui()
-            refresh_navigation()   # ← ADDED
+            refresh_navigation()
             continue
 
         if len(cmd) != 2:
@@ -43,13 +43,13 @@ def tools_ui():
         if action == "on":
             activate_module(module)
             register(module, None)
-            refresh_navigation()   # ← ADDED
+            refresh_navigation()
             print(f"🟢 {module} activated + registered.")
 
         elif action == "off":
             deactivate_module(module)
             registry.pop(module, None)
-            refresh_navigation()   # ← ADDED
+            refresh_navigation()
             print(f"🔴 {module} deactivated + unregistered.")
 
         else:

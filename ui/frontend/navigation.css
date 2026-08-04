@@ -1,0 +1,24 @@
+
+.nav-bar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    background: #f0f0f0;
+    padding: 10px;
+    border-bottom: 1px solid #ccc;
+}
+
+.nav-tab {
+    padding: 8px 14px;
+    background: #ffffff;
+    border: 1px solid #d0d0d0;
+    border-radius: 6px;
+    text-decoration: none;
+    color: #333;
+    font-family: sans-serif;
+    transition: background 0.2s;
+}
+
+.nav-tab:hover {
+    background: #e6e6e6;
+}

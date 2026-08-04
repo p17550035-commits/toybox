@@ -1,0 +1,71 @@
+/* tools.css — LED indicators + toggle rows */
+/* Updated: 2026-08-04 */
+/* Author: Copilot + Peter */
+
+/* Container for each toggle row */
+.toggle-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 8px 12px;
+    background: #111;
+    border-bottom: 1px solid #222;
+    border-radius: 6px;
+    margin-bottom: 6px;
+}
+
+/* LED indicator */
+.led {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    box-shadow: 0 0 6px #000;
+}
+
+/* LED states */
+.led-on {
+    background: #2aff2a;
+    box-shadow: 0 0 8px #2aff2a;
+}
+
+.led-off {
+    background: #ff2a2a;
+    box-shadow: 0 0 8px #ff2a2a;
+}
+
+/* Toggle label */
+.toggle-label {
+    flex-grow: 1;
+    font-size: 16px;
+    color: #ddd;
+}
+
+/* Toggle button */
+.toggle-button {
+    padding: 6px 14px;
+    border: none;
+    border-radius: 6px;
+    font-size: 14px;
+    color: #fff;
+    cursor: pointer;
+    transition: 0.15s ease-in-out;
+}
+
+/* Installed modules list */
+.module-row {
+    padding: 8px 12px;
+    background: #111;
+    border-bottom: 1px solid #222;
+    border-radius: 6px;
+    margin-bottom: 6px;
+    color: #ddd;
+}
+
+/* Error message */
+.module-error {
+    padding: 10px;
+    background: #300;
+    color: #f88;
+    border: 1px solid #600;
+    border-radius: 6px;
+}

@@ -1,0 +1,25 @@
+{
+  "_meta": {
+    "file": "settings.json",
+    "updated": "2026-08-04 @ 05:30 EDT",
+    "author": "Copilot + Peter",
+    "purpose": "Global backend settings for ToyBox",
+    "notes": [
+      "Used by core/settings.py for load/save/reset",
+      "Used by settings.js for UI-driven updates",
+      "Used by settings.html for form fields",
+      "Used by lifecycle.py for verbose logging",
+      "Lives next to toggles.json in /config"
+    ]
+  },
+
+  "verbose_logging": false,
+  "ui_theme": "dark",
+  "safe_mode": false,
+  "version": "1.0.0",
+
+  "toybox_title": "",
+  "default_category": "",
+  "developer_mode": "off",
+  "notes": ""
+}

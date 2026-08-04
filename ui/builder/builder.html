@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Module Builder</title>
+
+    <!-- Correct folder-based CSS -->
+    <link rel="stylesheet" href="/ui/builder/builder.css">
+    <link rel="stylesheet" href="/ui/frontend/navigation.css">
+
+    <!-- Correct folder-based JS -->
+    <script src="/ui/builder/builder.js?cache=1"></script>
+</head>
+
+<body>
+
+<div id="nav"></div>
+<script>
+(async () => {
+    try {
+        // FIX: use generated_nav.html instead of /ui/nav (route no longer exists)
+        const res = await fetch("/ui/frontend/generated_nav.html");
+        document.getElementById("nav").innerHTML = await res.text();
+    } catch {
+        document.getElementById("nav").innerHTML =
+            "<div style='padding:10px;background:#300;color:#f88;border-bottom:1px solid #600;'>Navigation failed to load</div>";
+    }
+})();
+</script>
+
+<div class="builder-container">
+
+    <!-- HEADER TILE -->
+    <div class="builder-tile">
+        <h1>Module Builder</h1>
+        <p>Create or delete modules using the UI.</p>
+    </div>
+
+    <!-- CREATE MODULE TILE -->
+    <div class="builder-tile">
+        <h2>Create Module</h2>
+
+        <label class="builder-label">Module Name</label>
+        <input class="builder-input" id="name" type="text">
+
+        <label class="builder-label">Description</label>
+        <textarea class="builder-input" id="description"></textarea>
+
+        <label class="builder-label">Category</label>
+        <input class="builder-input" id="category" type="text">
+
+        <label class="builder-label">Page Type</label>
+        <select class="builder-input" id="page_type">
+            <option value="fluent">Fluent</option>
+            <option value="dynamic">Dynamic</option>
+        </select>
+
+        <label class="builder-label">run.py Code</label>
+        <textarea class="builder-input" id="code"></textarea>
+
+        <label class="builder-label">install.sh Script</label>
+        <textarea class="builder-input" id="install_script"></textarea>
+
+        <label class="builder-label">uninstall.sh Script</label>
+        <textarea class="builder-input" id="uninstall_script"></textarea>
+
+        <label class="builder-label">config.json Data</label>
+        <textarea class="builder-input" id="config_data">{}</textarea>
+
+        <button class="builder-button" onclick="createModule()">Create Module</button>
+    </div>
+
+    <!-- DELETE MODULE TILE -->
+    <div class="builder-delete">
+        <h2 onclick="toggleDelete()" style="cursor:pointer;">
+            Delete Module ▼
+        </h2>
+
+        <div id="delete-section" style="display:none;">
+            <label class="builder-label">Select Module</label>
+            <select class="builder-input" id="delete_name"></select>
+            <button class="builder-button" onclick="deleteModule()">Delete Module</button>
+        </div>
+    </div>
+
+</div>
+
+<script>
+function toggleDelete() {
+    const box = document.getElementById("delete-section");
+    box.style.display = (box.style.display === "none") ? "block" : "none";
+}
+
+async function loadModuleList() {
+    const res = await fetch("/builder/list");
+    const json = await res.json();
+
+    const select = document.getElementById("delete_name");
+    select.innerHTML = "";
+    json.modules.forEach(m => {
+        const opt = document.createElement("option");
+        opt.value = m;
+        opt.textContent = m;
+        select.appendChild(opt);
+    });
+}
+
+loadModuleList();
+</script>
+
+</body>
+</html>
